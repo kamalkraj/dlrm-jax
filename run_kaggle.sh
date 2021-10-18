@@ -1,5 +1,8 @@
-
-export CUDA_VISIBLE_DEVICES=0
+if [[ $# == 1 ]]; then
+    dlrm_extra_option=$1
+else
+    dlrm_extra_option=""
+fi
 
 python dlrm_pytorch.py --arch-sparse-feature-size=16 \
                          --arch-mlp-bot="13-512-256-64-16" \
@@ -14,8 +17,8 @@ python dlrm_pytorch.py --arch-sparse-feature-size=16 \
                          --print-freq=1024 \
                          --print-time \
                          --dataset-multiprocessing \
-                         --use-gpu \
                          --num-workers=0 \
                          --test-mini-batch-size=16384 \
                          --test-num-workers=16 \
-                         --test-freq=10240
+                         --test-freq=10240 \
+                         $dlrm_extra_option
